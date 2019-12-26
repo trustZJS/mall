@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.mall.dao.goods.specAdministration.GoodsSpecAdministrationDao">
+
+<!--    下面条件 where 1=1 ,的原因,是因为当 sid与gName都不成立时,会报错,
+        所有添加 1=1 是为了防止where 空时 ,报错
+-->
+
+    <select id="getSearch" resultType="com.nf.mall.entity.goods.specAdministration.GoodsSpecAdministration">
+        select spu.goods_name,gs.spec_name,gsv.spec_value ,gssv.id as gssvId , gss.id as gssId
+        ,spu.id as spuId,sku.id as skuId,gs.id as gsId
+        from goods_spu spu
+        inner join goods_spu_spec gss on spu.id = gss.spu_id
+        inner join goods_spec gs on gs.id = gss.spec_id
+        inner join goods_spec_value gsv on gsv.spec_id = gs.id
+        inner join goods_sku_spec_value gssv on gssv.spec_value_id = gsv.id
+        inner join goods_sku sku on sku.id = gssv.sku_id and spu.id = sku.spu_id
+            <where>
+                1=1
+                <if test="sId != 0">
+                    and  gs.id = #{sId}
+                </if>
+                <if test="gName != ''">
+                    and spu.goods_name like '%' #{gName} '%'
+                </if>
+            </where>
+        order by spu.id
+    </select>
+
+
+    <delete id="deleteGssId">
+        delete from goods_spu_spec where id =#{gssId}
+    </delete>
+
+
+    <delete id="deleteGssvId">
+        delete from goods_sku_spec_value where id = #{gssvId}
+    </delete>
+<!--    update goods_spu set goods_name = '华为p10spu22' where id = 1;-->
+    <update id="updateGssId">
+        update goods_spu_spec set spec_id = #{sId} where id = #{gId}
+    </update>
+
+    <update id="updateGssvId" >
+        update goods_sku_spec_value set spec_value_id = #{svId} where id = #{gId}
+    </update>
+
+    <insert id="insertGssId">
+        insert into goods_spu_spec(spu_id, spec_id, gmt_create, gmt_update) values(#{sId},#{spId},default,default)
+    </insert>
+
+    <insert id="insertGssvId" >
+        insert into goods_sku_spec_value(sku_id, spec_value_id, gmt_create, gmt_update) values (#{sId},#{svId},default,default)
+    </insert>
+
+
+    <select id="getSpuAndSku" resultType="com.nf.mall.entity.goods.specAdministration.SpecAdministrationSpuAndSku">
+    select spu.goods_name as goodsName,spu.id as spuId,sku.sku_title as skuTitle,sku.id as skuId
+    from goods_spu spu inner join goods_sku sku on spu.id = sku.spu_id
+    <where>
+        1=1
+        <if test="gName !=''">
+           and spu.goods_name like '%' #{gName} '%'
+        </if>
+    </where>
+
+    </select>
+
+
+</mapper>

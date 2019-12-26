@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.mall.dao.goods.GoodsSpecValueDao">
+
+
+    <select id="getAll" resultType="com.nf.mall.entity.goods.GoodsSpecValue">
+
+        select gs.spec_name,gsv.id,gsv.spec_value from goods_spec gs inner join goods_spec_value gsv on gs.id=gsv.spec_id
+        <where>
+            <if test="id !=0">
+                spec_id = #{id}
+            </if>
+        </where>
+    </select>
+
+
+    <delete id="delete">
+        delete from goods_spec_value where id=#{id}
+    </delete>
+
+    <insert id="insert" >
+        insert into goods_spec_value(spec_id, spec_value, gmt_create, gmt_update) values (#{specValues.specId},#{specValues.specValue},default,default)
+    </insert>
+
+
+    <update id="update">
+        update goods_spec_value
+        <set>
+        <if test="specValues.specId != null">
+            spec_id = #{specValues.specId},
+        </if>
+        <if test="specValues.specValue != null">
+            spec_value = #{specValues.specValue},
+        </if>
+        </set>
+        where id = #{specValues.id}
+    </update>
+
+    <select id="getBySpecId" resultType="com.nf.mall.entity.goods.GoodsSpecValue">
+        select * from goods_spec_value where spec_id = #{sId}
+    </select>
+
+
+
+</mapper>

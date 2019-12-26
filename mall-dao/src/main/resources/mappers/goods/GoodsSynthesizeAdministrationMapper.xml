@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.mall.dao.goods.synthesizeAdministration.GoodsSynthesizeAdministrationDao">
+
+    <insert id="insertSpu" useGeneratedKeys="true" keyProperty="spuId">
+        insert into goods_spu(spu_no, goods_name, low_price, category_id, brand_id) values (#{gs.spuNo},#{gs.goodsName},#{gs.lowPrice},#{gs.categoryId},#{gs.brandId})
+    </insert>
+
+    <insert id="insertSku" >
+        insert into goods_sku(sku_title, price, stock, sku_img_path, spu_id) values (#{gs.skuTitle},#{gs.price},#{gs.stock},#{gs.skuImgPath},#{gs.spuId})
+    </insert>
+
+
+    <delete id="deleteSpu" >
+        delete from goods_spu where id = #{sId}
+    </delete>
+
+    <delete id="deleteSku">
+        delete from goods_sku where id = #{sId}
+    </delete>
+
+    <delete id="deleteSpec">
+        delete from goods_spu_spec where spu_id = #{sId}
+    </delete>
+
+    <delete id="deleteSpecValue">
+        delete from goods_sku_spec_value where sku_id = #{sId}
+    </delete>
+
+    <delete id="deleteSafeguard" >
+        delete from goods_sku_safeguard where sku_id =#{sId}
+    </delete>
+
+    <select id="queryEdit" resultType="com.nf.mall.entity.goods.synthesizeAdministration.Goods">
+select spu.spu_no,spu.goods_name,spu.category_id,spu.brand_id,sku.sku_title,sku.price,sku.stock,sku.sku_img_path,spu.low_price from goods_spu spu inner join goods_sku sku on spu.id = sku.spu_id
+where spu.id = #{sId}
+    </select>
+</mapper>

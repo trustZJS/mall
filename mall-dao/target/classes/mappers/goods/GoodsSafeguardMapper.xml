@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.mall.dao.goods.GoodsSafeguardDao">
+<!--模糊查询的主要   两个百分号要有空格-->
+    <select id="getAll" resultType="com.nf.mall.entity.goods.GoodsSafeguard">
+        select id, safeguard_name, price, gmt_create, gmt_update from goods_safeguard
+        <if test="name !=''">
+            where safeguard_name like '%' #{name} '%'
+        </if>
+    </select>
+
+    <delete id="delete">
+        delete from goods_safeguard where id=#{id}
+    </delete>
+
+
+    <update id="update">
+        update goods_safeguard
+        <set>
+            <if test="safeguard.safeguardName !=''">
+                safeguard_name =#{safeguard.safeguardName},
+            </if>
+            <if test="safeguard.price !=''">
+                price = #{safeguard.price},
+            </if>
+        </set>
+        where id =#{safeguard.id}
+    </update>
+
+    <insert id="insert" >
+      insert into goods_safeguard(safeguard_name, price) values (#{safeguard.safeguardName},#{safeguard.price});
+    </insert>
+
+</mapper>

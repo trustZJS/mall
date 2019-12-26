@@ -1,0 +1,11 @@
+com\nf\mall\entity\goods\GoodsBrand.class
+com\nf\mall\entity\goods\specAdministration\SpecAdministrationSpuAndSku.class
+com\nf\mall\entity\goods\GoodsCategory.class
+com\nf\mall\entity\goods\synthesizeAdministration\Goods.class
+com\nf\mall\entity\goods\GoodsSpecValue.class
+com\nf\mall\entity\goods\safeguardAdministration\GoodsSafeguardAdministration.class
+com\nf\mall\entity\goods\specAdministration\GoodsSpecAdministration.class
+com\nf\mall\entity\goods\GoodsSafeguard.class
+com\nf\mall\entity\goods\GoodsSpec.class
+com\nf\mall\entity\goods\GoodsSpuSpec.class
+com\nf\mall\entity\goods\GoodsSpuAndSpu.class

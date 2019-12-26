@@ -1,0 +1,10 @@
+com\nf\mall\dao\goods\specAdministration\GoodsSpecAdministrationDao.class
+com\nf\mall\dao\goods\GoodsBrandDao.class
+com\nf\mall\dao\goods\GoodsSafeguardDao.class
+com\nf\mall\dao\goods\synthesizeAdministration\GoodsSynthesizeAdministrationDao.class
+com\nf\mall\dao\goods\GoodsSpecDao.class
+com\nf\mall\dao\goods\GoodsSpuAndSpuDao.class
+com\nf\mall\dao\goods\GoodsCategoryDao.class
+com\nf\mall\dao\goods\GoodsSpuSpecDao.class
+com\nf\mall\dao\goods\GoodsSpecValueDao.class
+com\nf\mall\dao\goods\safeguardAdministration\GoodsSafeguardAdministrationDao.class

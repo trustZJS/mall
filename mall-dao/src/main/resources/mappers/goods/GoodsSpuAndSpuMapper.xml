@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.mall.dao.goods.GoodsSpuAndSpuDao">
+
+
+    <select id="getSpuAndSku" resultType="com.nf.mall.entity.goods.GoodsSpuAndSpu">
+        select spu.spu_no,spu.goods_name,spu.low_price,sku.price,sku.stock,
+        gb.brand_name,gc.category_name ,sku.sku_title,sku.sku_img_path from goods_spu spu right join
+        goods_brand gb on spu.category_id = gb.id left join goods_category gc on gc.id = spu.category_id
+        inner join goods_sku sku on sku.spu_id = spu.id
+        <where>
+            <if test="cid !=0">
+                spu.category_id = #{cid}
+            </if>
+            <if test="bid !=0">
+                spu.brand_id= #{bid}
+            </if>
+
+        </where>
+    </select>
+
+
+
+    <select id="getSpuAndSkuPage" resultType="com.nf.mall.entity.goods.GoodsSpuAndSpu">
+        select spu.id as spuId,sku.id as skuId,spu.spu_no,spu.goods_name,spu.low_price,sku.price,sku.stock,
+        gb.brand_name,gc.category_name ,sku.sku_title,sku.sku_img_path from goods_spu spu right join
+        goods_brand gb on spu.category_id = gb.id left join goods_category gc on gc.id = spu.category_id
+        inner join goods_sku sku on sku.spu_id = spu.id
+        <where>
+            <if test="cid !=0">
+                spu.category_id = #{cid}
+            </if>
+            <if test="bid !=0">
+              and spu.brand_id= #{bid}
+            </if>
+        </where>
+    </select>
+
+
+    <delete id="deleteSpu">
+        delete from goods_spu where id=#{id}
+    </delete>
+
+    <delete id="deleteSku" >
+        delete from goods_sku where spu_id=#{spuId}
+    </delete>
+
+
+    <insert id="insertSpu" useGeneratedKeys="true" keyProperty="spuId">
+        insert into goods_spu(spu_no, goods_name, low_price, category_id, brand_id)
+        values (#{spuAndSpu.spuNo},#{spuAndSpu.goodsName},#{spuAndSpu.lowPrice},#{spuAndSpu.categoryId},#{spuAndSpu.brandId})
+    </insert>
+
+
+    <insert id="insertSku">
+        insert into goods_sku (sku_title, price, stock, sku_img_path, shop_id, spu_id)
+        values (#{spuAndSpu.skuTitle},#{spuAndSpu.price},#{spuAndSpu.stock},#{spuAndSpu.skuImgPath},#{spuAndSpu.shopId},#{spuAndSpu.spuId});
+    </insert>
+
+
+    <update id="updateSpu" >
+        update goods_spu
+        <set>
+            <if test="spuAndSpu.spuNo != null">
+                spu_no = #{spuAndSpu.spuNo},
+            </if>
+            <if test="spuAndSpu.goodsName != null">
+                goods_name = #{spuAndSpu.goodsName},
+            </if>
+            <if test="spuAndSpu.lowPrice != null">
+                low_price = #{spuAndSpu.lowPrice},
+            </if>
+            <if test="spuAndSpu.categoryId != null">
+                category_id = #{spuAndSpu.categoryId},
+            </if>
+            <if test="spuAndSpu.brandId != null">
+                brand_id = #{spuAndSpu.brandId},
+            </if>
+        </set>
+        where id = #{spuAndSpu.id}
+    </update>
+
+
+    <update id="updateSku">
+        update goods_sku
+        <set>
+            <if test="spuAndSpu.skuTitle != null">
+                skuTitle = #{spuAndSpu.skuTitle},
+            </if>
+            <if test="spuAndSpu.price != null">
+                price = #{spuAndSpu.price},
+            </if>
+            <if test="spuAndSpu.stock != null">
+                stock = #{spuAndSpu.stock},
+            </if>
+            <if test="spuAndSpu.skuImgPath != null">
+                sku_img_path = #{spuAndSpu.skuImgPath},
+            </if>
+            <if test="spuAndSpu.shopId != null">
+                shop_id = #{spuAndSpu.shopId},
+            </if>
+            <if test="spuAndSpu.spuId != null">
+                spu_id = #{spuAndSpu.spuId},
+            </if>
+        </set>
+        where spu_id = #{spuAndSpu.id}
+
+    </update>
+
+
+</mapper>

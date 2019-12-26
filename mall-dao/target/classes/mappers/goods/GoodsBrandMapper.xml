@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.mall.dao.goods.GoodsBrandDao">
+
+
+
+    <delete id="delete" >
+        delete from goods_brand where id = #{did}
+    </delete>
+
+
+    <select id="getSearch" resultType="com.nf.mall.entity.goods.GoodsBrand">
+    select id,brand_name,img_path,gmt_create, gmt_update from goods_brand
+       <if test="name !=''">
+           where brand_name like '%' #{name} '%'
+       </if>
+    </select>
+
+
+    <insert id="insert" >
+        insert into goods_brand(brand_name,img_path, gmt_create, gmt_update) values(#{goodsBrand.brandName},#{goodsBrand.imgPath},default,default)
+    </insert>
+
+
+    <update id="update">
+        update goods_brand
+        <set>
+        <if test="goodsBrand.brandName !=''">
+            brand_name =#{goodsBrand.brandName},
+        </if>
+        <if test="goodsBrand.imgPath !=''">
+            img_path = #{goodsBrand.imgPath},
+        </if>
+        </set>
+         where id =#{goodsBrand.id}
+    </update>
+
+
+    <select id="getAll" resultType="com.nf.mall.entity.goods.GoodsBrand">
+        select id,brand_name from goods_brand
+    </select>
+
+</mapper>

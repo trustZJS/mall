@@ -1,0 +1,6 @@
+config\MybatisConfig.class
+config\SwaggerConfig.class
+com\nf\mall\utils\IdWorker.class
+config\EnableMybatisSpring.class
+config\MvcConfig.class
+config\MybatisSpringConfiguration.class

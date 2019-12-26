@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.mall.dao.goods.GoodsSpuSpecDao">
+
+
+    <select id="getAll" resultType="com.nf.mall.entity.goods.GoodsSpuSpec">
+   select gs.goods_name,gsc.spec_name,gss.spec_id,gss.spu_id,gss.id from goods_spu_spec gss
+    inner join goods_spu gs
+    on gss.spu_id = gs.id inner join
+    goods_spec gsc on gsc.id = gss.spec_id
+    <if test="sId != 0">
+        where gsc.id = #{sId}
+    </if>
+     order by gss.spu_id
+    </select>
+
+
+    <delete id="delete">
+        delete from goods_spu_spec where id = #{sid}
+    </delete>
+
+    <insert id="insert">
+        insert into goods_spu_spec(spu_id, spec_id, gmt_create, gmt_update) values (#{spuId},#{specId},default,default);
+    </insert>
+
+    <update id="update" >
+        update goods_spu_spec
+        <set>
+            <if test="specId != null">
+                spec_id = #{specId},
+            </if>
+            <if test="spuId != null">
+                spu_id = #{spuId},
+            </if>
+        </set>
+        where id = #{sid}
+    </update>
+
+    <select id="getGoodsName" resultType="com.nf.mall.entity.goods.GoodsSpuSpec" >
+        select goods_name,id from goods_spu
+    </select>
+
+</mapper>

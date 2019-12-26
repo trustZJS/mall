@@ -1,0 +1,5 @@
+com\restfull\dto\ResponseDTO.class
+com\restfull\dto\GoodsCategoryDTO.class
+com\restfull\config\SystemConfig.class
+com\restfull\controller\HomeController.class
+com\restfull\config\AppConfig.class

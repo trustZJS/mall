@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.mall.dao.goods.safeguardAdministration.GoodsSafeguardAdministrationDao">
+
+    <select id="getAll" resultType="com.nf.mall.entity.goods.safeguardAdministration.GoodsSafeguardAdministration">
+        select sku.sku_title,gs.safeguard_name,gs.price,gss.id as gssId,sku.id as skuId,spu.goods_name as goodsName
+        from goods_sku sku
+            inner join goods_spu spu on spu.id = sku.spu_id
+            inner join goods_sku_safeguard gss on sku.id = gss.sku_id
+            inner join goods_safeguard gs on gs.id = gss.safeguard_id
+            <where>
+                1=1
+                <if test="gName !=''">
+                    and spu.goods_name like '%' #{gName} '%'
+                </if>
+                    or sku.sku_title like '%' #{gName} '%'
+            </where>
+        order by spu.id
+    </select>
+
+    <delete id="delete">
+        delete from goods_sku_safeguard where id = #{gId}
+    </delete>
+
+    <update id="update">
+        update goods_sku_safeguard set safeguard_id = #{sId} where id =#{gId}
+    </update>
+
+
+    <insert id="insert" >
+        insert into goods_sku_safeguard(sku_id, safeguard_id) values (#{sId},#{saId})
+    </insert>
+
+</mapper>

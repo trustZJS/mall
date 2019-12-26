@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.mall.dao.goods.GoodsCategoryDao">
+
+    <select id="getSearch" resultType="com.nf.mall.entity.goods.GoodsCategory">
+        select id, category_name, gmt_create, gmt_update from goods_category
+        <if test="name !=''">
+            where category_name like '%' #{name} '%'
+        </if>
+    </select>
+
+    <delete id="delete">
+        delete from goods_category where id=#{id}
+    </delete>
+
+    <update id="update">
+        update goods_category set category_name =#{category.categoryName} where id= #{category.id}
+    </update>
+
+    <insert id="insert" >
+        insert into goods_category(category_name, gmt_create, gmt_update) values (#{category.categoryName},default,default)
+    </insert>
+
+    <select id="getAll" resultType="com.nf.mall.entity.goods.GoodsCategory">
+        select id,category_name from goods_category
+    </select>
+
+</mapper>
