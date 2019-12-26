@@ -28,7 +28,8 @@ public class AppConfig implements WebMvcConfigurer {
         registry.addFormatter(new DateFormatter("yyyy-MM-dd"));
     }
 
-    //这是拦截器
+    //这是拦截器，，，
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
 
