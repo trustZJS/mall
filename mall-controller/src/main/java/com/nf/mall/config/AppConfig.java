@@ -10,7 +10,7 @@ import org.springframework.format.datetime.DateFormatter;
 import org.springframework.web.servlet.config.annotation.*;
 
 @Configuration
-@EnableWebMvc   // 等价于xml的mvc:annotation-driven 这个开启之后，是关于校验
+@EnableWebMvc   // 等价于xml的mvc:annotation-driven 这个开启之后hi，是关于校验
 //扫描dao层
 @MapperScan("com.nf.mall.dao")
 //扫描service ，controller 等。。。   切面  过滤器
