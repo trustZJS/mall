@@ -50,7 +50,7 @@
         <!--校验器版本号-->
         <hibernate.validator.version>6.1.0.Final</hibernate.validator.version>
         <!--poi版本号-->
-        <version.poi>3.11-beta2</version.poi>
+        <version.poi>5.2.1</version.poi>
         <!--日志标准版本号-->
         <version.slf4j>1.7.28</version.slf4j>
         <!--日志版本号-->
