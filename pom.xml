@@ -38,7 +38,7 @@
         <!--mybatis-spring版本号-->
         <mybatis-spring.version>2.0.2</mybatis-spring.version>
         <!--spring版本号-->
-        <spring.version>5.2.0.RELEASE</spring.version>
+        <spring.version>5.3.18</spring.version>
         <!--servlet-api版本号-->
         <servlet-api.version>4.0.1</servlet-api.version>
         <!--servlet-jstl版本号-->
